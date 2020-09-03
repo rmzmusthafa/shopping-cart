@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,24 +26,28 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/add")
     public ResponseEntity<ApiResponse> addProduct(Product product, @CurrentUser UserPrincipal user){
         LOGGER.info(ENTERED + "addProduct() Method ");
         return  productService.addProduct(product);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/update")
     public ResponseEntity<ApiResponse> updateProduct(Product product, @CurrentUser UserPrincipal user){
         LOGGER.info(ENTERED + "updateProduct() Method ");
         return  productService.updateProduct(product);
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/list")
     public List<Product> listProduct(){
         LOGGER.info(ENTERED + "listProduct() Method ");
         return  productService.listProduct();
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/listByCategory")
     public List<Product> listByCategory(@RequestParam("category") String category){
         LOGGER.info(ENTERED + "listProduct() Method ");

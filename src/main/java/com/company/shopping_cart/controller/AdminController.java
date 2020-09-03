@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,12 +23,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/listAllCustomer")
     public List<UserForm> listAllCustomer(){
        LOGGER.info(ENTERED + "listAllCustomer");
        return adminService.listAllCustomer();
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/order/changeStatus")
     public ResponseEntity<ApiResponse>  changeStatus(@RequestParam("orderId") Long orderId){
         LOGGER.info(ENTERED + "changeStatus");

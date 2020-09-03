@@ -24,7 +24,7 @@ public class Order {
     private Long Quantity;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "pId")
+    @JoinColumn(name = "pro_id")
     private Product product ;
 
     @Column(name = "order_status")
